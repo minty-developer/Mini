@@ -2,7 +2,7 @@
 
 ### Branch
 
-- `main` — stable
+- `master` — stable
 - `develop` — development
 - `feature/*` — new features
 - `fix/*` — bug fixes
