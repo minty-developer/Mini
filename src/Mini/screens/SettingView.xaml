@@ -1,0 +1,84 @@
+<UserControl x:Class="Mini.SettingView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+             Width="400" Height="300">
+
+    <Border Background="#202020" 
+            BorderBrush="#3B3B3B" 
+            BorderThickness="1" 
+            CornerRadius="8" 
+            ClipToBounds="True">
+        <Grid>
+            <Grid.RowDefinitions>
+                <!-- 가상 창 상단 타이틀 바 (드래그 영역) -->
+                <RowDefinition Height="32"/>
+                <!-- 가상 창 내부 콘텐츠 영역 -->
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- [1. 타이틀 바] -->
+            <Border Grid.Row="0" 
+                    x:Name="HeaderBorder"
+                    Background="#2C2C2C" 
+                    MouseLeftButtonDown="Header_MouseLeftButtonDown"
+                    MouseLeftButtonUp="Header_MouseLeftButtonUp"
+                    MouseMove="Header_MouseMove"
+                    Cursor="Hand">
+                <Grid Margin="10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="TxtTitle" 
+                               Text="설정 (Settings)" 
+                               Foreground="White" 
+                               VerticalAlignment="Center" 
+                               FontWeight="SemiBold" 
+                               FontSize="12"/>
+
+                    <!-- 닫기 버튼 -->
+                    <Button Grid.Column="1" 
+                            Content="✕" 
+                            Foreground="#888888" 
+                            Background="Transparent" 
+                            BorderThickness="0" 
+                            Width="24" Height="24" 
+                            Padding="0" 
+                            Click="BtnClose_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- [2. 내부 콘텐츠 - 설정 항목 영역] -->
+            <Grid Grid.Row="1" Margin="16">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- 설정 입력 항목들 (스크롤 가능) -->
+                <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" Margin="0,0,0,12">
+                    <StackPanel>
+                        <!-- 타겟 호스트 설정 -->
+                        <TextBlock Text="타겟 호스트 / IP" Foreground="#CCCCCC" FontSize="12" Margin="0,0,0,6"/>
+                        <ui:TextBox x:Name="TxtTargetHost" 
+                                    PlaceholderText="예: 8.8.8.8 또는 google.com" 
+                                    Margin="0,0,0,16"/>
+
+                        <!-- 필요 시 항목을 아래에 계속 추가 가능 -->
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- 하단 저장 버튼 -->
+                <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <ui:Button x:Name="BtnSave" 
+                               Content="저장" 
+                               Appearance="Primary" 
+                               Width="80" 
+                               Click="BtnSave_Click"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>
